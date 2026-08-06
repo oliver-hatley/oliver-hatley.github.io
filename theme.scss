@@ -1,0 +1,155 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=EB+Garamond:wght@400;500&display=swap');
+
+// ---- Palette ----
+$paper:  #f4f3f0;   // page background
+$ink:    #2b2a28;   // body text
+$bronze: #a8875c;   // accent
+$muted:  #7c7873;   // secondary text
+$rule:   #dcd9d3;   // hairline dividers
+
+// ---- Bootstrap overrides ----
+$body-bg:    $paper;
+$body-color: $ink;
+$link-color: $bronze;
+$link-hover-color: #8d6f45;
+
+$font-family-sans-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+$headings-font-family:   "Cormorant Garamond", Georgia, serif;
+$headings-font-weight: 300;
+
+$font-size-base: 1.125rem;
+$line-height-base: 1.7;
+
+$navbar-bg: $paper;
+$border-color: $rule;
+
+/*-- scss:rules --*/
+
+.navbar {
+  border-bottom: 1px solid $rule;
+}
+
+.navbar-nav .nav-link {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+}
+
+h1, h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  text-align: center;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.4rem; margin-top: 4rem; }
+
+.tagline {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: $bronze;
+  font-size: 0.9rem;
+}
+
+hr {
+  border-top: 1px solid $rule;
+  opacity: 1;
+  margin: 2.5rem 0;
+}
+
+// ---- Timeline ----
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 2.5rem;
+  position: relative;
+  margin: 3rem 0 4rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: $rule;
+}
+
+.tl-card {
+  position: relative;
+  padding-top: 2.2rem;
+}
+
+.tl-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $paper;
+  border: 1px solid $bronze;
+}
+
+.tl-card > p:first-child {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: $muted;
+  margin-bottom: 0.5rem;
+}
+
+.tl-card > p:first-child strong { font-weight: 400; }
+
+.tl-card h3 {
+  font-size: 1.1rem;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.7rem;
+}
+
+.tl-card h3 a {
+  color: $ink;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.tl-card h3 a:hover { border-bottom-color: $bronze; }
+
+.tl-card p {
+  font-size: 0.93rem;
+  color: $muted;
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+
+.tl-card code {
+  display: inline-block;
+  background: none;
+  color: $bronze;
+  font-family: inherit;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid $rule;
+  border-radius: 0;
+  padding: 0.18rem 0.55rem;
+  margin: 0 0.25rem 0.35rem 0;
+}
+
+@media (max-width: 767px) {
+  .timeline::before,
+  .tl-card::before { display: none; }
+  .tl-card {
+    padding-top: 1.5rem;
+    border-top: 1px solid $rule;
+  }
+}

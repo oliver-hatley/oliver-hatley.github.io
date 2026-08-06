@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: _site
 
 website:
   title: "Oliver Hatley - Portfolio"
@@ -7,15 +8,15 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-
+      - href: index.qmd#projects
+        text: Projects
+      - href: index.qmd#experience
+        text: Experience
+      - href: index.qmd#contact
+        text: Contact
+        
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: theme.scss
     css: styles.css
-    toc: true
-
-
-
+    toc: false

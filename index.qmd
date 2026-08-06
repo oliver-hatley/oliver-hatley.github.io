@@ -1,7 +1,62 @@
 ---
-title: "Oliver Hatley - Portfolio"
+pagetitle: "Oliver Hatley"
+toc: false
 ---
 
-This is a Quarto website.
+# Oliver Hatley
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+::: {.tagline}
+Data analysis · Economics · Mobile · Birmingham
+:::
+
+------------------------------------------------------------------------
+
+## About {#about}
+
+Write two or three sentences here. What you studied, what kind of
+analysis you like doing, what you're building toward. Plain language,
+first person, no buzzwords.
+
+## Projects {#projects}
+
+::: {.timeline}
+
+::: {.tl-card}
+**2023 · College**
+
+### [Flight Paths and House Prices](projects/flight-paths.qmd)
+
+How FAA routing changes moved property values beneath a new approach corridor.
+
+`Stata` `Geospatial` `Panel data` `DiD`
+:::
+
+::: {.tl-card}
+**2023 · College**
+
+### [Second Project Title](projects/project-two.qmd)
+
+One sentence describing what you found.
+
+`Stata` `Time series`
+:::
+
+::: {.tl-card}
+**2026 · In progress**
+
+### Next project
+
+Something new, in SQL and Python.
+
+`SQL` `Python`
+:::
+
+:::
+
+## Experience {#experience}
+
+Coming next.
+
+## Contact {#contact}
+
+Coming next.
