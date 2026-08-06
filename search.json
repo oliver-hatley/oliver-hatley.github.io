@@ -1,10 +1,45 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Oliver Hatley - Portfolio",
+    "objectID": "projects/flight-paths.html",
+    "href": "projects/flight-paths.html",
+    "title": "Flight Paths and House Prices",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "One or two sentences stating the question and the answer. Someone who reads only this should know what you found."
+  },
+  {
+    "objectID": "projects/flight-paths.html#the-question",
+    "href": "projects/flight-paths.html#the-question",
+    "title": "Flight Paths and House Prices",
+    "section": "The question",
+    "text": "The question\nWhat you set out to find out, and why it mattered."
+  },
+  {
+    "objectID": "projects/flight-paths.html#data-1",
+    "href": "projects/flight-paths.html#data-1",
+    "title": "Flight Paths and House Prices",
+    "section": "Data",
+    "text": "Data\nWhere it came from, how many observations, what shape it was in when you got it, and what you had to do to make it usable."
+  },
+  {
+    "objectID": "projects/flight-paths.html#method-1",
+    "href": "projects/flight-paths.html#method-1",
+    "title": "Flight Paths and House Prices",
+    "section": "Method",
+    "text": "Method\nYour identification strategy in plain language first, then the specification. Assume the reader knows econometrics but not your project."
+  },
+  {
+    "objectID": "projects/flight-paths.html#results",
+    "href": "projects/flight-paths.html#results",
+    "title": "Flight Paths and House Prices",
+    "section": "Results",
+    "text": "Results\nWhat you found. Lead with the number."
+  },
+  {
+    "objectID": "projects/flight-paths.html#what-id-do-differently",
+    "href": "projects/flight-paths.html#what-id-do-differently",
+    "title": "Flight Paths and House Prices",
+    "section": "What I’d do differently",
+    "text": "What I’d do differently\nThe honest section. What was underpowered, what assumption you’d want to test harder, what you’d redo with what you know now.\n← All projects"
   },
   {
     "objectID": "about.html",
@@ -12,5 +47,40 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "Data analysis · Economics · Mobile · Birmingham\n\n\n\n\nWrite two or three sentences here. What you studied, what kind of analysis you like doing, what you’re building toward. Plain language, first person, no buzzwords.\n\n\n\n\n\n2023 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2023 · College\n\n\nOne sentence describing what you found.\nStata Time series\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python\n\n\n\n\n\n\n\n\n2019 — 2023\n\n\n\nEconometrics, panel data methods, statistical computing in Stata.\n\n\n\n\nTools\n\n\n\nReplace this with what you actually use, in rough order of confidence.\n\n\n\n\n\n\nEmail LinkedIn GitHub"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "Write two or three sentences here. What you studied, what kind of analysis you like doing, what you’re building toward. Plain language, first person, no buzzwords."
+  },
+  {
+    "objectID": "index.html#projects",
+    "href": "index.html#projects",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "2023 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2023 · College\n\n\nOne sentence describing what you found.\nStata Time series\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "2019 — 2023\n\n\n\nEconometrics, panel data methods, statistical computing in Stata.\n\n\n\n\nTools\n\n\n\nReplace this with what you actually use, in rough order of confidence."
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "Email LinkedIn GitHub"
   }
 ]
