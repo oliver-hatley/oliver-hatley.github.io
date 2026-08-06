@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A difference-in-differences study of 147 Phoenix-area zip codes, 2010-2020 — and a demonstration of how the original specification produced a false positive.">
+
+<title>Phoenix Sky Harbor NextGen – Oliver Hatley - Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-58dad64818cc86518cd143fdb9902bd2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#projects"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#experience"> 
+<span class="menu-text">Experience</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html#contact"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#the-original-analysis-and-what-was-wrong-with-it" id="toc-the-original-analysis-and-what-was-wrong-with-it" class="nav-link" data-scroll-target="#the-original-analysis-and-what-was-wrong-with-it">The original analysis, and what was wrong with it</a></li>
+  <li><a href="#the-revised-specification" id="toc-the-revised-specification" class="nav-link" data-scroll-target="#the-revised-specification">The revised specification</a></li>
+  <li><a href="#is-the-control-group-a-valid-comparison" id="toc-is-the-control-group-a-valid-comparison" class="nav-link" data-scroll-target="#is-the-control-group-a-valid-comparison">Is the control group a valid comparison?</a></li>
+  <li><a href="#event-study-newly-affected-vs-control" id="toc-event-study-newly-affected-vs-control" class="nav-link" data-scroll-target="#event-study-newly-affected-vs-control">Event study: newly affected vs control</a></li>
+  <li><a href="#headline-estimate" id="toc-headline-estimate" class="nav-link" data-scroll-target="#headline-estimate">Headline estimate</a></li>
+  <li><a href="#what-i-would-do-differently" id="toc-what-i-would-do-differently" class="nav-link" data-scroll-target="#what-i-would-do-differently">What I would do differently</a></li>
+  <li><a href="#files" id="toc-files" class="nav-link" data-scroll-target="#files">Files</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Phoenix Sky Harbor NextGen</h1>
+<p class="subtitle lead">Did new flight paths lower nearby home values?</p>
+</div>
+
+<div>
+  <div class="description">
+    A difference-in-differences study of 147 Phoenix-area zip codes, 2010-2020 — and a demonstration of how the original specification produced a false positive.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- ============================================================
+     SUMMARY
+     Front-loaded on purpose. Assume a reader gives this page
+     thirty seconds before deciding whether to keep reading.
+     ============================================================ -->
+<section id="summary" class="level2">
+<h2 data-anchor-id="summary">Summary</h2>
+<p>In September 2014, the FAA rerouted departure paths out of Phoenix Sky Harbor as part of its NextGen airspace programme. Neighbourhoods that had never had aircraft overhead suddenly did. Residents sued, and in August 2017 a federal court ordered the routes reversed.</p>
+<p>That sequence is close to a natural experiment: a sharp, unanticipated change in aircraft noise, applied to some neighbourhoods and not others, and then undone. I used it to ask whether the affected areas saw home values grow more slowly than comparable areas nearby.</p>
+<p><strong>The answer is no — not measurably.</strong> Zip codes that gained flight noise show a cumulative gap of <strong>−6.3%</strong> against the control group by January 2020, but that estimate cannot be distinguished from zero (95% CI: −18.0% to +5.3%, p = 0.284).</p>
+<p>The more interesting finding is methodological. My original college specification produced a large, highly significant estimate of <strong>+$18,486 per home (p = 0.004)</strong>. That result does not survive taking logs of the outcome, adding month fixed effects, or a placebo test on a date when nothing happened. This page presents both the original analysis and the revision, because the gap between them is the part I learned the most from.</p>
+<hr>
+<!-- ============================================================
+     BACKGROUND
+     ============================================================ -->
+</section>
+<section id="background" class="level2">
+<h2 data-anchor-id="background">Background</h2>
+<p>NextGen replaced ground-based radar navigation with satellite-based routing. One practical consequence is that departure paths become far narrower: instead of aircraft fanning out across a broad corridor, they follow near-identical tracks. For anyone living under a new track, that means concentrated, repetitive overflight noise where there was previously little or none.</p>
+<p>The Phoenix rollout is unusually clean for research purposes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>September 2014</td>
+<td>New departure routes go live, with no meaningful public consultation</td>
+</tr>
+<tr class="even">
+<td>2014–2017</td>
+<td>City of Phoenix and neighbourhood groups sue the FAA</td>
+</tr>
+<tr class="odd">
+<td>August 2017</td>
+<td>Federal appeals court rules against the FAA and orders routes restored</td>
+</tr>
+</tbody>
+</table>
+<p>Two things make this attractive. First, the change was abrupt rather than phased, so there is a clear before and after. Second, it was later reversed, which gives a second shock in the opposite direction — if noise genuinely moves prices, the effect should unwind.</p>
+<hr>
+<!-- ============================================================
+     DATA
+     ============================================================ -->
+</section>
+<section id="data" class="level2">
+<h2 data-anchor-id="data">Data</h2>
+<p><strong>Outcome.</strong> Zillow Home Value Index (ZHVI), all homes, monthly by zip code. ZHVI is a smoothed estimate of typical home value rather than a transaction average, so it is not distorted by which particular houses happened to sell in a given month.</p>
+<p><strong>Panel.</strong> 147 zip codes across Maricopa and Pinal County, monthly from January 2010 to January 2020. 17,749 zip-month observations.</p>
+<p>The window deliberately stops before 2020. Anything after that point is contaminated by the pandemic housing market, which would swamp an effect of this size.</p>
+<section id="defining-the-four-groups" class="level3">
+<h3 data-anchor-id="defining-the-four-groups">Defining the four groups</h3>
+<p>Zip codes were assigned to groups by overlaying the pre-2014 and post-2014 flight corridors on zip code boundaries in QGIS:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/qgis_crosswalk.png" class="img-fluid figure-img"></p>
+<figcaption>Zip code boundaries against the old and new departure corridors. This mapping step produced the crosswalk file used to assign every zip code to a treatment group.</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Planes before 2014</th>
+<th>Planes after 2014</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Newly affected</td>
+<td>No</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr class="odd">
+<td>Lost noise</td>
+<td><strong>Yes</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Always affected</td>
+<td><strong>Yes</strong></td>
+<td><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The four-way split matters more than it might look. “Control” and “always affected” are genuinely different kinds of place — control zips are suburban areas planes never flew over, while always-affected zips sit in central Phoenix under a corridor that predates the policy. Lumping them together as “untreated” would compare central-city housing to suburban housing and attribute the difference to aircraft.</p>
+<hr>
+<!-- ============================================================
+     THE ORIGINAL ANALYSIS
+     ============================================================ -->
+</section>
+</section>
+<section id="the-original-analysis-and-what-was-wrong-with-it" class="level2">
+<h2 data-anchor-id="the-original-analysis-and-what-was-wrong-with-it">The original analysis, and what was wrong with it</h2>
+<p>The version I submitted for the course estimated the model on home values in dollars, and projected a counterfactual — what the affected zip codes <em>would</em> have been worth had the routes never changed — then read the damage off the gap between the two lines:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nextgen_actual_vs_counterfactual.png" class="img-fluid figure-img"></p>
+<figcaption>Original chart: actual home values against a simulated counterfactual for the affected zip codes.</figcaption>
+</figure>
+</div>
+<p>It produced a large, significant number: <strong>+$18,486 per home, p = 0.004</strong>.</p>
+<p>Three problems, in order of how much they matter:</p>
+<p><strong>The outcome was in dollars, not logs.</strong> An expensive zip code and a cheap one respond to the same shock by different dollar amounts but similar percentages. Estimating in levels lets the expensive zips dominate the result, and the affected areas were not a random draw from the price distribution.</p>
+<p><strong>There were no month fixed effects.</strong> Without them, the model has no way to absorb what the Phoenix housing market as a whole was doing in any given month. The period covers the post-recession recovery, which was steep and uneven across submarkets, so a lot of what the model attributed to flight paths was really the recovery arriving at different speeds in different places.</p>
+<p><strong>Nothing tested whether the control group was a valid comparison.</strong> The entire design rests on the assumption that treated and control zips would have moved together absent the policy. I asserted it rather than checking it — and as it turns out, for two of the three groups it is false.</p>
+<p>The counterfactual-simulation approach was also a dead end in its own right. It made the result look precise by drawing a single smooth projected line, when the honest version of that picture is a wide band of uncertainty.</p>
+<hr>
+<!-- ============================================================
+     REVISED SPECIFICATION
+     ============================================================ -->
+</section>
+<section id="the-revised-specification" class="level2">
+<h2 data-anchor-id="the-revised-specification">The revised specification</h2>
+<p>All estimates below use log home value as the outcome, with zip code <strong>and</strong> month fixed effects, and standard errors clustered by zip code.</p>
+<p>In plain terms:</p>
+<ul>
+<li><strong>Log outcome</strong> means coefficients read as percentage changes, so a cheap zip and an expensive one contribute on the same scale.</li>
+<li><strong>Zip fixed effects</strong> absorb everything permanently different about each zip code — school quality, distance to downtown, housing stock. The model only uses movement <em>within</em> a zip code over time.</li>
+<li><strong>Month fixed effects</strong> absorb whatever was happening market-wide that month, so the estimate compares groups against each other in the same month rather than against a trend line.</li>
+<li><strong>Clustering by zip</strong> accounts for the fact that observations from the same zip code in consecutive months are not independent pieces of evidence. Without it, standard errors are far too small and things look significant when they are not.</li>
+</ul>
+<p>Rather than a single before/after step, the model estimates a differential <em>trend</em> for each group, plus a change in that trend after the August 2017 reversal.</p>
+<section id="table-1.-did-affected-areas-grow-more-slowly" class="level3">
+<h3 data-anchor-id="table-1.-did-affected-areas-grow-more-slowly">Table 1. Did affected areas grow more slowly?</h3>
+<p>Annual growth rate relative to control zip codes.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Sept 2014 – Aug 2017</th>
+<th>After Aug 2017</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Newly affected</td>
+<td>+0.2%</td>
+<td>−2.8%</td>
+</tr>
+<tr class="even">
+<td>Lost noise</td>
+<td>+3.9%</td>
+<td>−4.0%</td>
+</tr>
+<tr class="odd">
+<td>Always affected</td>
+<td>+4.2%</td>
+<td>−3.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The first column covers the period when NextGen was in effect; the second covers the period after the court ordered it reversed. A negative number means that group grew more slowly than control.</p>
+<p>The group that <em>gained</em> flight noise shows essentially no difference while the planes were overhead. And after the reversal, all three groups decline at similar rates — including the always-affected group, whose exposure never changed at either date. A shared post-2017 slowdown across groups with completely different noise histories is not a noise effect. It is something else happening to central Phoenix.</p>
+</section>
+<section id="table-2.-main-specification" class="level3">
+<h3 data-anchor-id="table-2.-main-specification">Table 2. Main specification</h3>
+<p>Monthly differential trend, log points.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Newly affected</th>
+<th>Lost noise</th>
+<th>Always affected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Post-shock trend</td>
+<td>0.00020</td>
+<td>0.00328</td>
+<td>0.00345***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.00171)</td>
+<td>(0.00182)</td>
+<td>(0.00123)</td>
+</tr>
+<tr class="odd">
+<td>Change after reversal</td>
+<td>−0.00255</td>
+<td>−0.00658***</td>
+<td>−0.00603***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.00195)</td>
+<td>(0.00206)</td>
+<td>(0.00149)</td>
+</tr>
+<tr class="odd">
+<td>Net post-reversal trend</td>
+<td>−0.00235***</td>
+<td>−0.00330***</td>
+<td>−0.00258***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.00064)</td>
+<td>(0.00057)</td>
+<td>(0.00054)</td>
+</tr>
+</tbody>
+</table>
+<p>Standard errors in parentheses. *** p&lt;0.01, ** p&lt;0.05, * p&lt;0.10. Multiply any coefficient by 12 for an annual rate. The net post-reversal trend is the sum of the two rows above it, computed with <code>lincom</code> so that the standard error accounts for the covariance between the two estimates rather than treating them as independent.</p>
+<hr>
+<!-- ============================================================
+     VALIDITY — the analytical core of the page
+     ============================================================ -->
+</section>
+</section>
+<section id="is-the-control-group-a-valid-comparison" class="level2">
+<h2 data-anchor-id="is-the-control-group-a-valid-comparison">Is the control group a valid comparison?</h2>
+<p>This is the section the original analysis was missing entirely, and it changes the interpretation of everything above.</p>
+<section id="table-3.-two-tests" class="level3">
+<h3 data-anchor-id="table-3.-two-tests">Table 3. Two tests</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Pre-trend test (p)</th>
+<th>Placebo shock, Sept 2012</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Newly affected</td>
+<td>0.335</td>
+<td>+2.1%/yr (p = 0.413)</td>
+<td>Passes both</td>
+</tr>
+<tr class="even">
+<td>Lost noise</td>
+<td>0.018</td>
+<td>+7.9%/yr (p = 0.003)</td>
+<td>Fails both</td>
+</tr>
+<tr class="odd">
+<td>Always affected</td>
+<td>0.003</td>
+<td>+7.9%/yr (p &lt; 0.001)</td>
+<td>Fails both</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The pre-trend test</strong> is a joint F-test that all four pre-treatment event-study coefficients equal zero. A <em>high</em> p-value is the good outcome here: it means the groups were tracking each other before anything happened, which is what makes them comparable afterwards.</p>
+<p><strong>The placebo test</strong> runs the identical model against a fake treatment date in September 2012, using only pre-treatment data. Nothing happened in September 2012. Any “effect” the model finds is spurious by construction, so it is a direct measure of how much the design invents from nothing.</p>
+<p>Lost-noise and always-affected both produce a large, highly significant effect from a policy that never happened — roughly twice the size of their estimated coefficients at the real 2014 shock. Those two groups simply cannot be compared against the suburban control group. Whatever the model picks up there is central-Phoenix geography, not aircraft.</p>
+<p>Only the newly-affected group survives both checks. It is therefore the only comparison against control worth interpreting.</p>
+</section>
+<section id="table-4.-the-cleanest-comparison-lost-noise-vs-always-affected" class="level3">
+<h3 data-anchor-id="table-4.-the-cleanest-comparison-lost-noise-vs-always-affected">Table 4. The cleanest comparison: lost noise vs always affected</h3>
+<p>If comparing central Phoenix to the suburbs is the problem, the fix is to compare central Phoenix to itself. Lost-noise and always-affected zips sat under the <em>same</em> pre-2014 corridor, in the same neighbourhoods and the same submarket. After 2014, one lost its overflights and the other kept them.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Coefficient</th>
+<th>Std. err.</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Post-shock trend</td>
+<td>−0.00017</td>
+<td>0.00168</td>
+<td>0.918</td>
+</tr>
+<tr class="even">
+<td>Change after reversal</td>
+<td>−0.00054</td>
+<td>0.00174</td>
+<td>0.755</td>
+</tr>
+</tbody>
+</table>
+<p>96 zip codes, 11,616 observations.</p>
+<p>This comparison holds geography constant, which no comparison against the suburban control group can. The two groups are statistically indistinguishable in both periods — a difference of essentially zero, with tight enough standard errors that a large effect would have shown up.</p>
+<hr>
+<!-- ============================================================
+     EVENT STUDY
+     ============================================================ -->
+</section>
+</section>
+<section id="event-study-newly-affected-vs-control" class="level2">
+<h2 data-anchor-id="event-study-newly-affected-vs-control">Event study: newly affected vs control</h2>
+<p>The tables above compress everything into average trends. The event study instead traces the gap year by year, which shows <em>when</em> any divergence appears — and timing is what distinguishes a real effect from a coincidence.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/event_study_newly_affected.png" class="img-fluid figure-img"></p>
+<figcaption>Cumulative gap between newly-affected and control zip codes, by year from the September 2014 shock. Flat before the shock; the gap only opens from 2017 onward.</figcaption>
+</figure>
+</div>
+<section id="table-5.-event-study-coefficients" class="level3">
+<h3 data-anchor-id="table-5.-event-study-coefficients">Table 5. Event study coefficients</h3>
+<p>Cumulative gap relative to the year before the shock, log points.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Years from Sept 2014</th>
+<th>Coefficient</th>
+<th>Std. err.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>−5</td>
+<td>−0.043</td>
+<td>0.042</td>
+</tr>
+<tr class="even">
+<td>−4</td>
+<td>−0.044</td>
+<td>0.046</td>
+</tr>
+<tr class="odd">
+<td>−3</td>
+<td>−0.019</td>
+<td>0.039</td>
+</tr>
+<tr class="even">
+<td>−2</td>
+<td>−0.008</td>
+<td>0.016</td>
+</tr>
+<tr class="odd">
+<td>−1</td>
+<td>baseline</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>−0.000</td>
+<td>0.011</td>
+</tr>
+<tr class="odd">
+<td>+1</td>
+<td>−0.010</td>
+<td>0.023</td>
+</tr>
+<tr class="even">
+<td>+2</td>
+<td>−0.012</td>
+<td>0.034</td>
+</tr>
+<tr class="odd">
+<td>+3</td>
+<td>−0.032</td>
+<td>0.042</td>
+</tr>
+<tr class="even">
+<td>+4</td>
+<td>−0.058</td>
+<td>0.045</td>
+</tr>
+<tr class="odd">
+<td>+5</td>
+<td>−0.070</td>
+<td>0.049</td>
+</tr>
+</tbody>
+</table>
+<p>No coefficient is statistically distinguishable from zero. The pre-treatment values are flat, which is what validates the design in the first place.</p>
+<p>The gap only opens from year +3 onward — that is, from 2017. Which coincides with the court-ordered <em>reversal</em>, not with the 2014 rerouting. A noise effect that appears three years after the planes arrive, and grows fastest after they leave, does not fit the story.</p>
+<hr>
+<!-- ============================================================
+     HEADLINE
+     ============================================================ -->
+</section>
+</section>
+<section id="headline-estimate" class="level2">
+<h2 data-anchor-id="headline-estimate">Headline estimate</h2>
+<p>Cumulative gap for newly-affected zip codes by January 2020:</p>
+<blockquote class="blockquote">
+<p><strong>−6.3%</strong> — 95% CI: −18.0% to +5.3%, p = 0.284</p>
+</blockquote>
+<p>The point estimate is negative, but it cannot be distinguished from zero, and the confidence interval is wide enough to contain effects of the size the hedonic noise literature typically reports (roughly 0.5–1.0% of home value per decibel).</p>
+<p>The honest reading is that this is <strong>a null result driven by limited precision, not evidence that no effect exists</strong>. With 147 zip codes and a treated group of modest size, the study cannot rule out a meaningful effect — it can only say it did not find one.</p>
+<section id="what-the-results-show-together" class="level3">
+<h3 data-anchor-id="what-the-results-show-together">What the results show together</h3>
+<p>Two independent routes reach the same answer:</p>
+<ol type="1">
+<li>Comparing newly-affected zips against control — the one comparison that survives both validity checks — finds no detectable effect, and what movement there is arrives three years after the planes did.</li>
+<li>Comparing lost-noise against always-affected — the comparison that holds neighbourhood and submarket constant — finds nothing in either period.</li>
+</ol>
+<p>And the large, significant effect from the original specification does not survive any of the three corrections.</p>
+</section>
+<section id="robustness" class="level3">
+<h3 data-anchor-id="robustness">Robustness</h3>
+<ul>
+<li>Re-running with an alternative reversal date of March 2018 leaves the results unchanged.</li>
+<li>No zip codes were ambiguous in the QGIS crosswalk, so no judgement calls were needed in assigning groups.</li>
+</ul>
+<hr>
+<!-- ============================================================
+     REFLECTION
+     ============================================================ -->
+</section>
+</section>
+<section id="what-i-would-do-differently" class="level2">
+<h2 data-anchor-id="what-i-would-do-differently">What I would do differently</h2>
+<p><strong>Treat exposure as a dose, not a switch.</strong> Every specification here treats a zip code as either affected or not. In reality a zip code directly under a departure track experiences something very different from one clipped at the edge, and a continuous measure of exposure would use that variation instead of throwing it away. This is the single change most likely to turn an imprecise null into a real estimate.</p>
+<p><strong>Match on pre-period trajectory rather than assuming comparability.</strong> The pre-trend failures for two of three groups say the control group was chosen badly. Selecting comparison zips on their pre-2014 price path — rather than on not having planes — would give a defensible comparison for all three groups instead of one.</p>
+<p><strong>Take the timing seriously.</strong> The gap opening in 2017 rather than 2014 has an alternative explanation I find plausible: a delayed reaction to the original shock, as realtors and buyers gradually recognised which areas had become noisier. Complaint volumes rose year over year through the period, which is consistent with awareness building slowly rather than arriving with the planes. Testing that would mean bringing in noise-complaint counts by area and date as a measure of <em>perceived</em> exposure — which is arguably what the housing market actually responds to.</p>
+<p>I have deliberately not gone back to gather that data. The point of revisiting this project was to fix what was wrong with the inference, not to extend it indefinitely.</p>
+<hr>
+<!-- ============================================================
+     FILES
+     Relative paths — these resolve against this page's own folder,
+     so they keep working regardless of the site's URL structure.
+     ============================================================ -->
+</section>
+<section id="files" class="level2">
+<h2 data-anchor-id="files">Files</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="files/original.do"><code>original.do</code></a></td>
+<td>The Stata script as submitted for the course</td>
+</tr>
+<tr class="even">
+<td><a href="files/revised_annotated.do"><code>revised_annotated.do</code></a></td>
+<td>The revised analysis, commented throughout</td>
+</tr>
+<tr class="odd">
+<td><a href="files/grouping.csv"><code>grouping.csv</code></a></td>
+<td>Zip-code-to-group crosswalk produced in QGIS</td>
+</tr>
+</tbody>
+</table>
+<p>The Zillow ZHVI file is not included here — it is public, frequently updated, and large. Download “ZHVI All Homes, by ZIP Code” from <a href="https://www.zillow.com/research/data/">Zillow Research</a>. The repository README has the full instructions for re-running the analysis.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/oliver-hatley\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

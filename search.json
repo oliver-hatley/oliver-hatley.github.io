@@ -1,80 +1,108 @@
 [
   {
-    "objectID": "projects/flight-paths.html",
-    "href": "projects/flight-paths.html",
-    "title": "Flight Paths and House Prices",
+    "objectID": "projects/phoenix-nextgen/index.html",
+    "href": "projects/phoenix-nextgen/index.html",
+    "title": "Phoenix Sky Harbor NextGen",
     "section": "",
-    "text": "One or two sentences stating the question and the answer. Someone who reads only this should know what you found."
+    "text": "In September 2014, the FAA rerouted departure paths out of Phoenix Sky Harbor as part of its NextGen airspace programme. Neighbourhoods that had never had aircraft overhead suddenly did. Residents sued, and in August 2017 a federal court ordered the routes reversed.\nThat sequence is close to a natural experiment: a sharp, unanticipated change in aircraft noise, applied to some neighbourhoods and not others, and then undone. I used it to ask whether the affected areas saw home values grow more slowly than comparable areas nearby.\nThe answer is no — not measurably. Zip codes that gained flight noise show a cumulative gap of −6.3% against the control group by January 2020, but that estimate cannot be distinguished from zero (95% CI: −18.0% to +5.3%, p = 0.284).\nThe more interesting finding is methodological. My original college specification produced a large, highly significant estimate of +$18,486 per home (p = 0.004). That result does not survive taking logs of the outcome, adding month fixed effects, or a placebo test on a date when nothing happened. This page presents both the original analysis and the revision, because the gap between them is the part I learned the most from."
   },
   {
-    "objectID": "projects/flight-paths.html#the-question",
-    "href": "projects/flight-paths.html#the-question",
-    "title": "Flight Paths and House Prices",
-    "section": "The question",
-    "text": "The question\nWhat you set out to find out, and why it mattered."
+    "objectID": "projects/phoenix-nextgen/index.html#summary",
+    "href": "projects/phoenix-nextgen/index.html#summary",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "",
+    "text": "In September 2014, the FAA rerouted departure paths out of Phoenix Sky Harbor as part of its NextGen airspace programme. Neighbourhoods that had never had aircraft overhead suddenly did. Residents sued, and in August 2017 a federal court ordered the routes reversed.\nThat sequence is close to a natural experiment: a sharp, unanticipated change in aircraft noise, applied to some neighbourhoods and not others, and then undone. I used it to ask whether the affected areas saw home values grow more slowly than comparable areas nearby.\nThe answer is no — not measurably. Zip codes that gained flight noise show a cumulative gap of −6.3% against the control group by January 2020, but that estimate cannot be distinguished from zero (95% CI: −18.0% to +5.3%, p = 0.284).\nThe more interesting finding is methodological. My original college specification produced a large, highly significant estimate of +$18,486 per home (p = 0.004). That result does not survive taking logs of the outcome, adding month fixed effects, or a placebo test on a date when nothing happened. This page presents both the original analysis and the revision, because the gap between them is the part I learned the most from."
   },
   {
-    "objectID": "projects/flight-paths.html#data-1",
-    "href": "projects/flight-paths.html#data-1",
-    "title": "Flight Paths and House Prices",
+    "objectID": "projects/phoenix-nextgen/index.html#background",
+    "href": "projects/phoenix-nextgen/index.html#background",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "Background",
+    "text": "Background\nNextGen replaced ground-based radar navigation with satellite-based routing. One practical consequence is that departure paths become far narrower: instead of aircraft fanning out across a broad corridor, they follow near-identical tracks. For anyone living under a new track, that means concentrated, repetitive overflight noise where there was previously little or none.\nThe Phoenix rollout is unusually clean for research purposes:\n\n\n\n\n\n\n\nDate\nEvent\n\n\n\n\nSeptember 2014\nNew departure routes go live, with no meaningful public consultation\n\n\n2014–2017\nCity of Phoenix and neighbourhood groups sue the FAA\n\n\nAugust 2017\nFederal appeals court rules against the FAA and orders routes restored\n\n\n\nTwo things make this attractive. First, the change was abrupt rather than phased, so there is a clear before and after. Second, it was later reversed, which gives a second shock in the opposite direction — if noise genuinely moves prices, the effect should unwind."
+  },
+  {
+    "objectID": "projects/phoenix-nextgen/index.html#data",
+    "href": "projects/phoenix-nextgen/index.html#data",
+    "title": "Phoenix Sky Harbor NextGen",
     "section": "Data",
-    "text": "Data\nWhere it came from, how many observations, what shape it was in when you got it, and what you had to do to make it usable."
+    "text": "Data\nOutcome. Zillow Home Value Index (ZHVI), all homes, monthly by zip code. ZHVI is a smoothed estimate of typical home value rather than a transaction average, so it is not distorted by which particular houses happened to sell in a given month.\nPanel. 147 zip codes across Maricopa and Pinal County, monthly from January 2010 to January 2020. 17,749 zip-month observations.\nThe window deliberately stops before 2020. Anything after that point is contaminated by the pandemic housing market, which would swamp an effect of this size.\n\nDefining the four groups\nZip codes were assigned to groups by overlaying the pre-2014 and post-2014 flight corridors on zip code boundaries in QGIS:\n\n\n\nZip code boundaries against the old and new departure corridors. This mapping step produced the crosswalk file used to assign every zip code to a treatment group.\n\n\n\n\n\nGroup\nPlanes before 2014\nPlanes after 2014\n\n\n\n\nControl\nNo\nNo\n\n\nNewly affected\nNo\nYes\n\n\nLost noise\nYes\nNo\n\n\nAlways affected\nYes\nYes\n\n\n\nThe four-way split matters more than it might look. “Control” and “always affected” are genuinely different kinds of place — control zips are suburban areas planes never flew over, while always-affected zips sit in central Phoenix under a corridor that predates the policy. Lumping them together as “untreated” would compare central-city housing to suburban housing and attribute the difference to aircraft."
   },
   {
-    "objectID": "projects/flight-paths.html#method-1",
-    "href": "projects/flight-paths.html#method-1",
-    "title": "Flight Paths and House Prices",
-    "section": "Method",
-    "text": "Method\nYour identification strategy in plain language first, then the specification. Assume the reader knows econometrics but not your project."
+    "objectID": "projects/phoenix-nextgen/index.html#the-original-analysis-and-what-was-wrong-with-it",
+    "href": "projects/phoenix-nextgen/index.html#the-original-analysis-and-what-was-wrong-with-it",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "The original analysis, and what was wrong with it",
+    "text": "The original analysis, and what was wrong with it\nThe version I submitted for the course estimated the model on home values in dollars, and projected a counterfactual — what the affected zip codes would have been worth had the routes never changed — then read the damage off the gap between the two lines:\n\n\n\nOriginal chart: actual home values against a simulated counterfactual for the affected zip codes.\n\n\nIt produced a large, significant number: +$18,486 per home, p = 0.004.\nThree problems, in order of how much they matter:\nThe outcome was in dollars, not logs. An expensive zip code and a cheap one respond to the same shock by different dollar amounts but similar percentages. Estimating in levels lets the expensive zips dominate the result, and the affected areas were not a random draw from the price distribution.\nThere were no month fixed effects. Without them, the model has no way to absorb what the Phoenix housing market as a whole was doing in any given month. The period covers the post-recession recovery, which was steep and uneven across submarkets, so a lot of what the model attributed to flight paths was really the recovery arriving at different speeds in different places.\nNothing tested whether the control group was a valid comparison. The entire design rests on the assumption that treated and control zips would have moved together absent the policy. I asserted it rather than checking it — and as it turns out, for two of the three groups it is false.\nThe counterfactual-simulation approach was also a dead end in its own right. It made the result look precise by drawing a single smooth projected line, when the honest version of that picture is a wide band of uncertainty."
   },
   {
-    "objectID": "projects/flight-paths.html#results",
-    "href": "projects/flight-paths.html#results",
-    "title": "Flight Paths and House Prices",
-    "section": "Results",
-    "text": "Results\nWhat you found. Lead with the number."
+    "objectID": "projects/phoenix-nextgen/index.html#the-revised-specification",
+    "href": "projects/phoenix-nextgen/index.html#the-revised-specification",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "The revised specification",
+    "text": "The revised specification\nAll estimates below use log home value as the outcome, with zip code and month fixed effects, and standard errors clustered by zip code.\nIn plain terms:\n\nLog outcome means coefficients read as percentage changes, so a cheap zip and an expensive one contribute on the same scale.\nZip fixed effects absorb everything permanently different about each zip code — school quality, distance to downtown, housing stock. The model only uses movement within a zip code over time.\nMonth fixed effects absorb whatever was happening market-wide that month, so the estimate compares groups against each other in the same month rather than against a trend line.\nClustering by zip accounts for the fact that observations from the same zip code in consecutive months are not independent pieces of evidence. Without it, standard errors are far too small and things look significant when they are not.\n\nRather than a single before/after step, the model estimates a differential trend for each group, plus a change in that trend after the August 2017 reversal.\n\nTable 1. Did affected areas grow more slowly?\nAnnual growth rate relative to control zip codes.\n\n\n\nGroup\nSept 2014 – Aug 2017\nAfter Aug 2017\n\n\n\n\nNewly affected\n+0.2%\n−2.8%\n\n\nLost noise\n+3.9%\n−4.0%\n\n\nAlways affected\n+4.2%\n−3.1%\n\n\n\nThe first column covers the period when NextGen was in effect; the second covers the period after the court ordered it reversed. A negative number means that group grew more slowly than control.\nThe group that gained flight noise shows essentially no difference while the planes were overhead. And after the reversal, all three groups decline at similar rates — including the always-affected group, whose exposure never changed at either date. A shared post-2017 slowdown across groups with completely different noise histories is not a noise effect. It is something else happening to central Phoenix.\n\n\nTable 2. Main specification\nMonthly differential trend, log points.\n\n\n\n\n\n\n\n\n\n\nNewly affected\nLost noise\nAlways affected\n\n\n\n\nPost-shock trend\n0.00020\n0.00328\n0.00345***\n\n\n\n(0.00171)\n(0.00182)\n(0.00123)\n\n\nChange after reversal\n−0.00255\n−0.00658***\n−0.00603***\n\n\n\n(0.00195)\n(0.00206)\n(0.00149)\n\n\nNet post-reversal trend\n−0.00235***\n−0.00330***\n−0.00258***\n\n\n\n(0.00064)\n(0.00057)\n(0.00054)\n\n\n\nStandard errors in parentheses. *** p&lt;0.01, ** p&lt;0.05, * p&lt;0.10. Multiply any coefficient by 12 for an annual rate. The net post-reversal trend is the sum of the two rows above it, computed with lincom so that the standard error accounts for the covariance between the two estimates rather than treating them as independent."
   },
   {
-    "objectID": "projects/flight-paths.html#what-id-do-differently",
-    "href": "projects/flight-paths.html#what-id-do-differently",
-    "title": "Flight Paths and House Prices",
-    "section": "What I’d do differently",
-    "text": "What I’d do differently\nThe honest section. What was underpowered, what assumption you’d want to test harder, what you’d redo with what you know now.\n← All projects"
+    "objectID": "projects/phoenix-nextgen/index.html#is-the-control-group-a-valid-comparison",
+    "href": "projects/phoenix-nextgen/index.html#is-the-control-group-a-valid-comparison",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "Is the control group a valid comparison?",
+    "text": "Is the control group a valid comparison?\nThis is the section the original analysis was missing entirely, and it changes the interpretation of everything above.\n\nTable 3. Two tests\n\n\n\nGroup\nPre-trend test (p)\nPlacebo shock, Sept 2012\nVerdict\n\n\n\n\nNewly affected\n0.335\n+2.1%/yr (p = 0.413)\nPasses both\n\n\nLost noise\n0.018\n+7.9%/yr (p = 0.003)\nFails both\n\n\nAlways affected\n0.003\n+7.9%/yr (p &lt; 0.001)\nFails both\n\n\n\nThe pre-trend test is a joint F-test that all four pre-treatment event-study coefficients equal zero. A high p-value is the good outcome here: it means the groups were tracking each other before anything happened, which is what makes them comparable afterwards.\nThe placebo test runs the identical model against a fake treatment date in September 2012, using only pre-treatment data. Nothing happened in September 2012. Any “effect” the model finds is spurious by construction, so it is a direct measure of how much the design invents from nothing.\nLost-noise and always-affected both produce a large, highly significant effect from a policy that never happened — roughly twice the size of their estimated coefficients at the real 2014 shock. Those two groups simply cannot be compared against the suburban control group. Whatever the model picks up there is central-Phoenix geography, not aircraft.\nOnly the newly-affected group survives both checks. It is therefore the only comparison against control worth interpreting.\n\n\nTable 4. The cleanest comparison: lost noise vs always affected\nIf comparing central Phoenix to the suburbs is the problem, the fix is to compare central Phoenix to itself. Lost-noise and always-affected zips sat under the same pre-2014 corridor, in the same neighbourhoods and the same submarket. After 2014, one lost its overflights and the other kept them.\n\n\n\n\nCoefficient\nStd. err.\np\n\n\n\n\nPost-shock trend\n−0.00017\n0.00168\n0.918\n\n\nChange after reversal\n−0.00054\n0.00174\n0.755\n\n\n\n96 zip codes, 11,616 observations.\nThis comparison holds geography constant, which no comparison against the suburban control group can. The two groups are statistically indistinguishable in both periods — a difference of essentially zero, with tight enough standard errors that a large effect would have shown up."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "projects/phoenix-nextgen/index.html#event-study-newly-affected-vs-control",
+    "href": "projects/phoenix-nextgen/index.html#event-study-newly-affected-vs-control",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "Event study: newly affected vs control",
+    "text": "Event study: newly affected vs control\nThe tables above compress everything into average trends. The event study instead traces the gap year by year, which shows when any divergence appears — and timing is what distinguishes a real effect from a coincidence.\n\n\n\nCumulative gap between newly-affected and control zip codes, by year from the September 2014 shock. Flat before the shock; the gap only opens from 2017 onward.\n\n\n\nTable 5. Event study coefficients\nCumulative gap relative to the year before the shock, log points.\n\n\n\nYears from Sept 2014\nCoefficient\nStd. err.\n\n\n\n\n−5\n−0.043\n0.042\n\n\n−4\n−0.044\n0.046\n\n\n−3\n−0.019\n0.039\n\n\n−2\n−0.008\n0.016\n\n\n−1\nbaseline\n—\n\n\n0\n−0.000\n0.011\n\n\n+1\n−0.010\n0.023\n\n\n+2\n−0.012\n0.034\n\n\n+3\n−0.032\n0.042\n\n\n+4\n−0.058\n0.045\n\n\n+5\n−0.070\n0.049\n\n\n\nNo coefficient is statistically distinguishable from zero. The pre-treatment values are flat, which is what validates the design in the first place.\nThe gap only opens from year +3 onward — that is, from 2017. Which coincides with the court-ordered reversal, not with the 2014 rerouting. A noise effect that appears three years after the planes arrive, and grows fastest after they leave, does not fit the story."
+  },
+  {
+    "objectID": "projects/phoenix-nextgen/index.html#headline-estimate",
+    "href": "projects/phoenix-nextgen/index.html#headline-estimate",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "Headline estimate",
+    "text": "Headline estimate\nCumulative gap for newly-affected zip codes by January 2020:\n\n−6.3% — 95% CI: −18.0% to +5.3%, p = 0.284\n\nThe point estimate is negative, but it cannot be distinguished from zero, and the confidence interval is wide enough to contain effects of the size the hedonic noise literature typically reports (roughly 0.5–1.0% of home value per decibel).\nThe honest reading is that this is a null result driven by limited precision, not evidence that no effect exists. With 147 zip codes and a treated group of modest size, the study cannot rule out a meaningful effect — it can only say it did not find one.\n\nWhat the results show together\nTwo independent routes reach the same answer:\n\nComparing newly-affected zips against control — the one comparison that survives both validity checks — finds no detectable effect, and what movement there is arrives three years after the planes did.\nComparing lost-noise against always-affected — the comparison that holds neighbourhood and submarket constant — finds nothing in either period.\n\nAnd the large, significant effect from the original specification does not survive any of the three corrections.\n\n\nRobustness\n\nRe-running with an alternative reversal date of March 2018 leaves the results unchanged.\nNo zip codes were ambiguous in the QGIS crosswalk, so no judgement calls were needed in assigning groups."
+  },
+  {
+    "objectID": "projects/phoenix-nextgen/index.html#what-i-would-do-differently",
+    "href": "projects/phoenix-nextgen/index.html#what-i-would-do-differently",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "What I would do differently",
+    "text": "What I would do differently\nTreat exposure as a dose, not a switch. Every specification here treats a zip code as either affected or not. In reality a zip code directly under a departure track experiences something very different from one clipped at the edge, and a continuous measure of exposure would use that variation instead of throwing it away. This is the single change most likely to turn an imprecise null into a real estimate.\nMatch on pre-period trajectory rather than assuming comparability. The pre-trend failures for two of three groups say the control group was chosen badly. Selecting comparison zips on their pre-2014 price path — rather than on not having planes — would give a defensible comparison for all three groups instead of one.\nTake the timing seriously. The gap opening in 2017 rather than 2014 has an alternative explanation I find plausible: a delayed reaction to the original shock, as realtors and buyers gradually recognised which areas had become noisier. Complaint volumes rose year over year through the period, which is consistent with awareness building slowly rather than arriving with the planes. Testing that would mean bringing in noise-complaint counts by area and date as a measure of perceived exposure — which is arguably what the housing market actually responds to.\nI have deliberately not gone back to gather that data. The point of revisiting this project was to fix what was wrong with the inference, not to extend it indefinitely."
+  },
+  {
+    "objectID": "projects/phoenix-nextgen/index.html#files",
+    "href": "projects/phoenix-nextgen/index.html#files",
+    "title": "Phoenix Sky Harbor NextGen",
+    "section": "Files",
+    "text": "Files\n\n\n\nFile\nWhat it is\n\n\n\n\noriginal.do\nThe Stata script as submitted for the course\n\n\nrevised_annotated.do\nThe revised analysis, commented throughout\n\n\ngrouping.csv\nZip-code-to-group crosswalk produced in QGIS\n\n\n\nThe Zillow ZHVI file is not included here — it is public, frequently updated, and large. Download “ZHVI All Homes, by ZIP Code” from Zillow Research. The repository README has the full instructions for re-running the analysis."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "Data analysis · Economics · Mobile · Birmingham\n\n\n\n\nWrite two or three sentences here. What you studied, what kind of analysis you like doing, what you’re building toward. Plain language, first person, no buzzwords.\n\n\n\n\n\n2023 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2023 · College\n\n\nOne sentence describing what you found.\nStata Time series\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python\n\n\n\n\n\n\n\n\n2019 — 2023\n\n\n\nEconometrics, panel data methods, statistical computing in Stata.\n\n\n\n\nTools\n\n\n\nReplace this with what you actually use, in rough order of confidence.\n\n\n\n\n\n\nEmail LinkedIn GitHub"
+    "text": "Data analysis · Mobile & Birmingham, AL\n\n\n\n\n\n\nEvent study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.\n\n\n\n\n\nI came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.\n\n\n\n\n\n2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python\n\n\n\n\n\n\n\n\n2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools\n\n\n\n\n\n\n\n\n\nEmail LinkedIn GitHub"
   },
   {
     "objectID": "index.html#about",
     "href": "index.html#about",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "Write two or three sentences here. What you studied, what kind of analysis you like doing, what you’re building toward. Plain language, first person, no buzzwords."
+    "text": "I came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made."
   },
   {
     "objectID": "index.html#projects",
     "href": "index.html#projects",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "2023 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2023 · College\n\n\nOne sentence describing what you found.\nStata Time series\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python"
+    "text": "2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python"
   },
   {
     "objectID": "index.html#experience",
     "href": "index.html#experience",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "2019 — 2023\n\n\n\nEconometrics, panel data methods, statistical computing in Stata.\n\n\n\n\nTools\n\n\n\nReplace this with what you actually use, in rough order of confidence."
+    "text": "2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools"
   },
   {
     "objectID": "index.html#contact",
