@@ -55,8 +55,30 @@ Something new, in SQL and Python.
 
 ## Experience {#experience}
 
-Coming next.
+::: {.exp-item}
+::: {.exp-when}
+2019 — 2023
+:::
+::: {.exp-what}
+### B.S. Economics — Louisiana State University
+Econometrics, panel data methods, statistical computing in Stata.
+:::
+:::
+
+::: {.exp-item}
+::: {.exp-when}
+Tools
+:::
+::: {.exp-what}
+### SQL · Excel · Python · R · Stata
+Replace this with what you actually use, in rough order of confidence.
+:::
+:::
 
 ## Contact {#contact}
 
-Coming next.
+::: {.contact}
+[Email](mailto:REPLACE@example.com)
+[LinkedIn](https://www.linkedin.com/in/REPLACE)
+[GitHub](https://github.com/oliver-hatley)
+:::

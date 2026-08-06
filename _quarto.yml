@@ -5,6 +5,8 @@ project:
 website:
   title: "Oliver Hatley - Portfolio"
   navbar:
+    title: false
+    search: false
     left:
       - href: index.qmd
         text: Home
@@ -14,9 +16,10 @@ website:
         text: Experience
       - href: index.qmd#contact
         text: Contact
-        
+
 format:
   html:
     theme: theme.scss
     css: styles.css
     toc: false
+    page-layout: full
