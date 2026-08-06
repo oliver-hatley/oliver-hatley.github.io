@@ -243,7 +243,6 @@ h3 {
   border-bottom: 1px solid $rule;
 }
 
-.exp-item:first-of-type { border-top: 1px solid $rule; }
 
 .exp-when {
   text-transform: uppercase;
@@ -292,4 +291,113 @@ h3 {
 .contact a:hover {
   color: $bronze;
   border-bottom-color: $bronze;
+}
+
+
+/* --- Firefox --- */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: $bronze $paper;
+}
+
+/* --- Chrome, Edge, Safari --- */
+html::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+html::-webkit-scrollbar-track {
+  background: darken($paper, 8%);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: $bronze;
+  border-radius: 10px;
+  border: 2px solid darken($paper, 4%);
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: $link-hover-color;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.hero-chart {
+  margin: 2.5rem 0 3rem;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.hero-chart a {
+  transition: opacity .25s ease;
+}
+
+.hero-chart a:hover {
+  opacity: 0.8;
+}
+
+.band {
+  position: relative;
+  padding: 3.5rem 0;
+}
+
+.band > :first-child {
+  margin-top: 0;
+}
+
+.band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  background: darken($paper, 3%);
+  z-index: -1;
+}
+
+html {
+  background: darken($paper, 3%);
+}
+
+.exp-item:last-of-type {
+  margin-bottom: 2.5rem;
+}
+
+body {
+  background: darken($paper, 3%);
+}
+
+.plain {
+  position: relative;
+  padding: 3.5rem 0;
+}
+
+.plain::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  background: $paper;
+  z-index: -1;
+}
+
+.plain > :first-child {
+  margin-top: 0;
 }

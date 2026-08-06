@@ -1,44 +1,48 @@
 ---
 pagetitle: "Oliver Hatley"
 toc: false
+
+include-in-header:
+  text: |
+    <style>
+      /* #quarto-header is the wrapper Quarto puts the navbar inside.
+         display: none removes it entirely — it takes up no space at all,
+         rather than sitting there invisible and leaving a gap. */
+      #quarto-header { display: none; }
+    </style>
 ---
 
 # Oliver Hatley
 
 ::: {.tagline}
-Data analysis · Economics · Mobile · Birmingham
+Data analysis · Mobile & Birmingham, AL
 :::
-
 ------------------------------------------------------------------------
 
+
+::: {.hero-chart}
+[![Event study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.](projects/phoenix-nextgen/files/event_study_hero.svg)](projects/phoenix-nextgen/index.qmd)
+:::
+
+::: {.plain}
 ## About {#about}
 
-Write two or three sentences here. What you studied, what kind of
-analysis you like doing, what you're building toward. Plain language,
-first person, no buzzwords.
+I came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that's the half of this I don't want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.
 
+:::
+::: {.band}
 ## Projects {#projects}
 
 ::: {.timeline}
 
 ::: {.tl-card}
-**2023 · College**
+**2026 · College**
 
-### [Flight Paths and House Prices](projects/flight-paths.qmd)
+### [**Flight Paths and House Prices**](projects/phoenix-nextgen/index.qmd)
 
 How FAA routing changes moved property values beneath a new approach corridor.
 
 `Stata` `Geospatial` `Panel data` `DiD`
-:::
-
-::: {.tl-card}
-**2023 · College**
-
-### [Second Project Title](projects/project-two.qmd)
-
-One sentence describing what you found.
-
-`Stata` `Time series`
 :::
 
 ::: {.tl-card}
@@ -52,16 +56,18 @@ Something new, in SQL and Python.
 :::
 
 :::
+:::
 
+::: {.plain}
 ## Experience {#experience}
 
 ::: {.exp-item}
 ::: {.exp-when}
-2019 — 2023
+2022 — 2026
 :::
 ::: {.exp-what}
-### B.S. Economics — Louisiana State University
-Econometrics, panel data methods, statistical computing in Stata.
+### B.S. Economics — University of Alabama at Birmingham
+Concentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.
 :::
 :::
 
@@ -70,15 +76,18 @@ Econometrics, panel data methods, statistical computing in Stata.
 Tools
 :::
 ::: {.exp-what}
-### SQL · Excel · Python · R · Stata
-Replace this with what you actually use, in rough order of confidence.
+### SQL · Excel · Stata · Python · R 
+
 :::
 :::
 
+:::
+::: {.band}
 ## Contact {#contact}
 
 ::: {.contact}
-[Email](mailto:REPLACE@example.com)
-[LinkedIn](https://www.linkedin.com/in/REPLACE)
+[Email](mailto:thatley09@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/oliver-hatley/)
 [GitHub](https://github.com/oliver-hatley)
+:::
 :::
