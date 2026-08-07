@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A difference-in-differences study of 147 Phoenix-area zip codes, 2010-2020 — and a demonstration of how the original specification produced a false positive.">
+<meta name="description" content="A difference-in-differences study of 147 Phoenix-area zip codes from 2010-2020, and a demonstration of how the original specification produced a false positive.">
 
-<title>Phoenix Sky Harbor NextGen – Oliver Hatley - Portfolio</title>
+<title>Flight Paths and House Prices – Oliver Hatley - Portfolio</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-58dad64818cc86518cd143fdb9902bd2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-15991e96cfd58bd2c8f6b949dc7b844f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -139,13 +139,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Phoenix Sky Harbor NextGen</h1>
+<h1 class="title">Flight Paths and House Prices</h1>
 <p class="subtitle lead">Did new flight paths lower nearby home values?</p>
 </div>
 
 <div>
   <div class="description">
-    A difference-in-differences study of 147 Phoenix-area zip codes, 2010-2020 — and a demonstration of how the original specification produced a false positive.
+    A difference-in-differences study of 147 Phoenix-area zip codes from 2010-2020, and a demonstration of how the original specification produced a false positive.
   </div>
 </div>
 
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="summary">Summary</h2>
 <p>In September 2014, the FAA rerouted departure paths out of Phoenix Sky Harbor as part of its NextGen airspace programme. Neighbourhoods that had never had aircraft overhead suddenly did. Residents sued, and in August 2017 a federal court ordered the routes reversed.</p>
 <p>That sequence is close to a natural experiment: a sharp, unanticipated change in aircraft noise, applied to some neighbourhoods and not others, and then undone. I used it to ask whether the affected areas saw home values grow more slowly than comparable areas nearby.</p>
-<p><strong>The answer is no — not measurably.</strong> Zip codes that gained flight noise show a cumulative gap of <strong>−6.3%</strong> against the control group by January 2020, but that estimate cannot be distinguished from zero (95% CI: −18.0% to +5.3%, p = 0.284).</p>
+<p><strong>The answer is no, not measurably.</strong> Zip codes that gained flight noise show a cumulative gap of <strong>−6.3%</strong> against the control group by January 2020, but that estimate cannot be distinguished from zero (95% CI: −18.0% to +5.3%, p = 0.284).</p>
 <p>The more interesting finding is methodological. My original college specification produced a large, highly significant estimate of <strong>+$18,486 per home (p = 0.004)</strong>. That result does not survive taking logs of the outcome, adding month fixed effects, or a placebo test on a date when nothing happened. This page presents both the original analysis and the revision, because the gap between them is the part I learned the most from.</p>
 <hr>
 <!-- ============================================================
@@ -208,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>Two things make this attractive. First, the change was abrupt rather than phased, so there is a clear before and after. Second, it was later reversed, which gives a second shock in the opposite direction — if noise genuinely moves prices, the effect should unwind.</p>
+<p>Two things make this attractive. First, the change was abrupt rather than phased, so there is a clear before and after. Second, it was later reversed, which gives a second shock in the opposite direction; if noise genuinely moves prices, the effect should unwind.</p>
 <hr>
 <!-- ============================================================
      DATA
@@ -245,21 +245,21 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td>Newly affected</td>
 <td>No</td>
-<td><strong>Yes</strong></td>
+<td>Yes</td>
 </tr>
 <tr class="odd">
 <td>Lost noise</td>
-<td><strong>Yes</strong></td>
+<td>Yes</td>
 <td>No</td>
 </tr>
 <tr class="even">
 <td>Always affected</td>
-<td><strong>Yes</strong></td>
-<td><strong>Yes</strong></td>
+<td>Yes</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
-<p>The four-way split matters more than it might look. “Control” and “always affected” are genuinely different kinds of place — control zips are suburban areas planes never flew over, while always-affected zips sit in central Phoenix under a corridor that predates the policy. Lumping them together as “untreated” would compare central-city housing to suburban housing and attribute the difference to aircraft.</p>
+<p>The four-way split matters more than it might look. “Control” and “Always affected” are genuinely different kinds of places. Control zips are suburban areas planes never flew over, while always-affected zips sit in central Phoenix under a corridor that predates the policy. Lumping them together as “untreated” would compare central-city housing to suburban housing and attribute the difference to aircraft.</p>
 <hr>
 <!-- ============================================================
      THE ORIGINAL ANALYSIS
@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-original-analysis-and-what-was-wrong-with-it" class="level2">
 <h2 data-anchor-id="the-original-analysis-and-what-was-wrong-with-it">The original analysis, and what was wrong with it</h2>
-<p>The version I submitted for the course estimated the model on home values in dollars, and projected a counterfactual — what the affected zip codes <em>would</em> have been worth had the routes never changed — then read the damage off the gap between the two lines:</p>
+<p>The version I submitted for the course estimated the model on home values in dollars, and projected a counterfactual, or what the affected zip codes <em>would</em> have been worth had the routes never changed, and then read the damage off the gap between the two lines:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/nextgen_actual_vs_counterfactual.png" class="img-fluid figure-img"></p>
@@ -279,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Three problems, in order of how much they matter:</p>
 <p><strong>The outcome was in dollars, not logs.</strong> An expensive zip code and a cheap one respond to the same shock by different dollar amounts but similar percentages. Estimating in levels lets the expensive zips dominate the result, and the affected areas were not a random draw from the price distribution.</p>
 <p><strong>There were no month fixed effects.</strong> Without them, the model has no way to absorb what the Phoenix housing market as a whole was doing in any given month. The period covers the post-recession recovery, which was steep and uneven across submarkets, so a lot of what the model attributed to flight paths was really the recovery arriving at different speeds in different places.</p>
-<p><strong>Nothing tested whether the control group was a valid comparison.</strong> The entire design rests on the assumption that treated and control zips would have moved together absent the policy. I asserted it rather than checking it — and as it turns out, for two of the three groups it is false.</p>
+<p><strong>Nothing tested whether the control group was a valid comparison.</strong> The entire design rests on the assumption that treated and control zips would have moved together absent the policy. I asserted it rather than checking it, and as it turns out, for two of the three groups it is false.</p>
 <p>The counterfactual-simulation approach was also a dead end in its own right. It made the result look precise by drawing a single smooth projected line, when the honest version of that picture is a wide band of uncertainty.</p>
 <hr>
 <!-- ============================================================
@@ -288,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-revised-specification" class="level2">
 <h2 data-anchor-id="the-revised-specification">The revised specification</h2>
-<p>All estimates below use log home value as the outcome, with zip code <strong>and</strong> month fixed effects, and standard errors clustered by zip code.</p>
+<p>All estimates below use log home value as the outcome, with zip code and month fixed effects, and standard errors clustered by zip code.</p>
 <p>In plain terms:</p>
 <ul>
 <li><strong>Log outcome</strong> means coefficients read as percentage changes, so a cheap zip and an expensive one contribute on the same scale.</li>
@@ -296,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Month fixed effects</strong> absorb whatever was happening market-wide that month, so the estimate compares groups against each other in the same month rather than against a trend line.</li>
 <li><strong>Clustering by zip</strong> accounts for the fact that observations from the same zip code in consecutive months are not independent pieces of evidence. Without it, standard errors are far too small and things look significant when they are not.</li>
 </ul>
-<p>Rather than a single before/after step, the model estimates a differential <em>trend</em> for each group, plus a change in that trend after the August 2017 reversal.</p>
+<p>Rather than a single before/after step, the model estimates a differential trend for each group, plus a change in that trend after the August 2017 reversal.</p>
 <section id="table-1.-did-affected-areas-grow-more-slowly" class="level3">
 <h3 data-anchor-id="table-1.-did-affected-areas-grow-more-slowly">Table 1. Did affected areas grow more slowly?</h3>
 <p>Annual growth rate relative to control zip codes.</p>
@@ -327,7 +327,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>The first column covers the period when NextGen was in effect; the second covers the period after the court ordered it reversed. A negative number means that group grew more slowly than control.</p>
-<p>The group that <em>gained</em> flight noise shows essentially no difference while the planes were overhead. And after the reversal, all three groups decline at similar rates — including the always-affected group, whose exposure never changed at either date. A shared post-2017 slowdown across groups with completely different noise histories is not a noise effect. It is something else happening to central Phoenix.</p>
+<p>The group that gained flight noise shows essentially no difference while the planes were overhead. And after the reversal, all three groups decline at similar rates, including the always-affected group, whose exposure never changed at either date. A shared post-2017 slowdown across groups with completely different noise histories is not a noise effect. It is something else happening to central Phoenix.</p>
 </section>
 <section id="table-2.-main-specification" class="level3">
 <h3 data-anchor-id="table-2.-main-specification">Table 2. Main specification</h3>
@@ -428,9 +428,9 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>The pre-trend test</strong> is a joint F-test that all four pre-treatment event-study coefficients equal zero. A <em>high</em> p-value is the good outcome here: it means the groups were tracking each other before anything happened, which is what makes them comparable afterwards.</p>
+<p><strong>The pre-trend test</strong> is a joint F-test that all four pre-treatment event-study coefficients equal zero. A high p-value is the good outcome here: it means the groups were tracking each other before anything happened, which is what makes them comparable afterwards.</p>
 <p><strong>The placebo test</strong> runs the identical model against a fake treatment date in September 2012, using only pre-treatment data. Nothing happened in September 2012. Any “effect” the model finds is spurious by construction, so it is a direct measure of how much the design invents from nothing.</p>
-<p>Lost-noise and always-affected both produce a large, highly significant effect from a policy that never happened — roughly twice the size of their estimated coefficients at the real 2014 shock. Those two groups simply cannot be compared against the suburban control group. Whatever the model picks up there is central-Phoenix geography, not aircraft.</p>
+<p>Lost-noise and always-affected both produce a large, highly significant effect from a policy that never happened; roughly twice the size of their estimated coefficients at the real 2014 shock. Those two groups simply cannot be compared against the suburban control group. Whatever the model picks up there is central-Phoenix geography, not aircraft.</p>
 <p>Only the newly-affected group survives both checks. It is therefore the only comparison against control worth interpreting.</p>
 </section>
 <section id="table-4.-the-cleanest-comparison-lost-noise-vs-always-affected" class="level3">
@@ -461,7 +461,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>96 zip codes, 11,616 observations.</p>
-<p>This comparison holds geography constant, which no comparison against the suburban control group can. The two groups are statistically indistinguishable in both periods — a difference of essentially zero, with tight enough standard errors that a large effect would have shown up.</p>
+<p>This comparison holds geography constant, which no comparison against the suburban control group can. The two groups are statistically indistinguishable in both periods, a difference of essentially zero, with tight enough standard errors that a large effect would have shown up.</p>
 <hr>
 <!-- ============================================================
      EVENT STUDY
@@ -470,7 +470,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="event-study-newly-affected-vs-control" class="level2">
 <h2 data-anchor-id="event-study-newly-affected-vs-control">Event study: newly affected vs control</h2>
-<p>The tables above compress everything into average trends. The event study instead traces the gap year by year, which shows <em>when</em> any divergence appears — and timing is what distinguishes a real effect from a coincidence.</p>
+<p>The tables above compress everything into average trends. The event study instead traces the gap year by year, which shows <em>when</em> any divergence appears, and timing is what distinguishes a real effect from a coincidence.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/event_study_newly_affected.png" class="img-fluid figure-img"></p>
@@ -547,7 +547,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>No coefficient is statistically distinguishable from zero. The pre-treatment values are flat, which is what validates the design in the first place.</p>
-<p>The gap only opens from year +3 onward — that is, from 2017. Which coincides with the court-ordered <em>reversal</em>, not with the 2014 rerouting. A noise effect that appears three years after the planes arrive, and grows fastest after they leave, does not fit the story.</p>
+<p>The gap only opens from year +3 onward (from 2017). This coincides with the court-ordered <em>reversal</em>, not with the 2014 rerouting. A noise effect that appears three years after the planes arrive, and grows fastest after they leave, does not fit the story.</p>
 <hr>
 <!-- ============================================================
      HEADLINE
@@ -558,7 +558,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="headline-estimate">Headline estimate</h2>
 <p>Cumulative gap for newly-affected zip codes by January 2020:</p>
 <blockquote class="blockquote">
-<p><strong>−6.3%</strong> — 95% CI: −18.0% to +5.3%, p = 0.284</p>
+<p><strong>−6.3%</strong> , 95% CI: −18.0% to +5.3%, p = 0.284</p>
 </blockquote>
 <p>The point estimate is negative, but it cannot be distinguished from zero, and the confidence interval is wide enough to contain effects of the size the hedonic noise literature typically reports (roughly 0.5–1.0% of home value per decibel).</p>
 <p>The honest reading is that this is <strong>a null result driven by limited precision, not evidence that no effect exists</strong>. With 147 zip codes and a treated group of modest size, the study cannot rule out a meaningful effect — it can only say it did not find one.</p>
@@ -566,8 +566,8 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-anchor-id="what-the-results-show-together">What the results show together</h3>
 <p>Two independent routes reach the same answer:</p>
 <ol type="1">
-<li>Comparing newly-affected zips against control — the one comparison that survives both validity checks — finds no detectable effect, and what movement there is arrives three years after the planes did.</li>
-<li>Comparing lost-noise against always-affected — the comparison that holds neighbourhood and submarket constant — finds nothing in either period.</li>
+<li>Comparing newly-affected zips against control (the one comparison that survives both validity checks) finds no detectable effect, and what movement there is arrives three years after the planes did.</li>
+<li>Comparing lost-noise against always-affected (the comparison that holds neighbourhood and submarket constant) finds nothing in either period.</li>
 </ol>
 <p>And the large, significant effect from the original specification does not survive any of the three corrections.</p>
 </section>
@@ -586,8 +586,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-i-would-do-differently" class="level2">
 <h2 data-anchor-id="what-i-would-do-differently">What I would do differently</h2>
 <p><strong>Treat exposure as a dose, not a switch.</strong> Every specification here treats a zip code as either affected or not. In reality a zip code directly under a departure track experiences something very different from one clipped at the edge, and a continuous measure of exposure would use that variation instead of throwing it away. This is the single change most likely to turn an imprecise null into a real estimate.</p>
-<p><strong>Match on pre-period trajectory rather than assuming comparability.</strong> The pre-trend failures for two of three groups say the control group was chosen badly. Selecting comparison zips on their pre-2014 price path — rather than on not having planes — would give a defensible comparison for all three groups instead of one.</p>
-<p><strong>Take the timing seriously.</strong> The gap opening in 2017 rather than 2014 has an alternative explanation I find plausible: a delayed reaction to the original shock, as realtors and buyers gradually recognised which areas had become noisier. Complaint volumes rose year over year through the period, which is consistent with awareness building slowly rather than arriving with the planes. Testing that would mean bringing in noise-complaint counts by area and date as a measure of <em>perceived</em> exposure — which is arguably what the housing market actually responds to.</p>
+<p><strong>Match on pre-period trajectory rather than assuming comparability.</strong> The pre-trend failures for two of three groups say the control group was chosen badly. Selecting comparison zips on their pre-2014 price path rather than on not having planes would give a defensible comparison for all three groups instead of one.</p>
+<p><strong>Take the timing seriously.</strong> The gap opening in 2017 rather than 2014 has an alternative explanation I find plausible: a delayed reaction to the original shock, as realtors and buyers gradually recognised which areas had become noisier. Complaint volumes rose year over year through the period, which is consistent with awareness building slowly rather than arriving with the planes. Testing that would mean bringing in noise-complaint counts by area and date as a measure of <em>perceived</em> exposure, which is arguably what the housing market actually responds to.</p>
 <p>I have deliberately not gone back to gather that data. The point of revisiting this project was to fix what was wrong with the inference, not to extend it indefinitely.</p>
 <hr>
 <!-- ============================================================
