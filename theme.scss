@@ -25,6 +25,8 @@ $line-height-base: 1.7;
 $navbar-bg: $paper;
 $border-color: $rule;
 
+$grid-body-width: 1000px;
+
 /*-- scss:rules --*/
 
 .navbar {
@@ -401,3 +403,17 @@ body {
 .plain > :first-child {
   margin-top: 0;
 }
+
+.hero-chart figure img {
+  border: none;
+}
+
+#title-block-header {
+  padding-bottom: 2.5rem;
+}
+
+blockquote {
+  background: $paper;
+  padding: 1.1rem 1.4rem 1.1rem 1.6rem;
+}
+

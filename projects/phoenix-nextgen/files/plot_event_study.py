@@ -134,8 +134,8 @@ fig, ax = plt.subplots(figsize=(11, 3.8))
 
 # Both the figure (the whole canvas) and the axes (the plotting area inside it)
 # need the paper colour, or you get a white rectangle sitting on the page.
-fig.patch.set_facecolor(PAPER)
-ax.set_facecolor(PAPER)
+fig.patch.set_facecolor("none")
+ax.set_facecolor("none")
 
 # --- the confidence band ---------------------------------------------------
 # Drawn first so it sits *behind* the line. Matplotlib stacks in call order.
@@ -251,7 +251,7 @@ fig.tight_layout()
 fig.savefig(
     "event_study_hero.svg",
     format="svg",
-    facecolor=PAPER,
+    transparent=True,
     bbox_inches="tight",
 )
 

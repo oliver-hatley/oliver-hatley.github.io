@@ -1,5 +1,4 @@
 ---
-pagetitle: "Oliver Hatley"
 toc: false
 
 include-in-header:
