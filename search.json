@@ -1,5 +1,89 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "Data analysis · Mobile & Birmingham, AL\n\n\n\n\n\n\nEvent study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.\n\n\n\n\n\nI came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.\n\n\n\n\n\n2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n2026 · Personal\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX\n\n\n\n\n\n\n\n\n2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools\n\n\n\n\n\n\n\n\n\nEmail LinkedIn GitHub"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "I came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made."
+  },
+  {
+    "objectID": "index.html#projects",
+    "href": "index.html#projects",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n2026 · Personal\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools"
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Oliver Hatley",
+    "section": "",
+    "text": "Email LinkedIn GitHub"
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html",
+    "href": "projects/nhtsa-recalls/index.html",
+    "title": "Recall Severity by Manufacturer",
+    "section": "",
+    "text": "Ford, GM and Chrysler issue more recalls than anyone. That doesn’t make their recalls the most dangerous. This project scores every vehicle recall in the National Highway Traffic Safety Administration (NHTSA) database for how serious the defect is, then ranks manufacturers by the typical severity of their recalls instead of the raw count.\nBuilt with SQL (PostgreSQL on Supabase) for cleaning and scoring, and Power BI (Power Query and DAX) for the dashboard."
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#the-dashboard",
+    "href": "projects/nhtsa-recalls/index.html#the-dashboard",
+    "title": "Recall Severity by Manufacturer",
+    "section": "The dashboard",
+    "text": "The dashboard\n\n\n\n\nOverview: 25,824 recalls covering 988.2 million vehicles, 1966 to 2025\n\n\n\n\n\nManufacturer ranking: vehicle recalls, manufacturers with at least 15 recalls\n\n\nDownloads: Power BI file (.pbix) · Dashboard PDF"
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#the-data",
+    "href": "projects/nhtsa-recalls/index.html#the-data",
+    "title": "Recall Severity by Manufacturer",
+    "section": "The data",
+    "text": "The data\n\nSource: NHTSA’s public recalls flat file, every recall from 1966 to 2025.\nSize: 25,824 recalls covering about 988 million vehicles.\nStructure: I split the raw file into four linked tables: manufacturers, components, recalls and reports."
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#how-i-built-it",
+    "href": "projects/nhtsa-recalls/index.html#how-i-built-it",
+    "title": "Recall Severity by Manufacturer",
+    "section": "How I built it",
+    "text": "How I built it\n\n1. Cleaning up manufacturer names\nThe same company often appears under several spellings (“Ford Motor Co” vs “Ford Motor Company”, or a name with and without “Inc.”). If left alone, one manufacturer’s recalls get split across several rows and its ranking is wrong.\nI found likely duplicates three ways: names that look alike letter by letter, names that only differ by a legal suffix like Inc., LLC or Corp., and names that sit inside another name. A handful of cases needed a judgment call (for example, whether two Daimler entities are really the same company), so I checked how many recalls each merge would move before committing it. Every merge is recorded in a lookup table so it can be audited or undone.\n\n\n2. Scoring how severe each recall is\nNHTSA doesn’t rate severity, so I built a score from two kinds of evidence:\n\nHard flags NHTSA records: whether owners were told Do Not Drive or Park Outside (fire risk), and how many affected vehicles actually got repaired.\nWhat the recall says can happen: each recall has a written consequence summary. I scanned it for keywords and sorted them into tiers, so “fire”, “crash” or “loss of steering” counts for more than “label may be missing”.\n\nThe two are combined in a Severity x Scope grid that gives each recall a danger level. Each manufacturer is then scored by how far its average recall sits above or below a typical recall.\n\n\n3. The dashboard\nIn Power BI I used Power Query to shape the tables (including custom columns to avoid a circular reference) and wrote DAX measures for the counts, shares and rankings. The ranking page only includes manufacturers with enough recalls for an average to mean something, so one bad recall can’t put a small company at the top."
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#what-i-found",
+    "href": "projects/nhtsa-recalls/index.html#what-i-found",
+    "title": "Recall Severity by Manufacturer",
+    "section": "What I found",
+    "text": "What I found\n\n\nKia and Mazda lead the carmakers on severity. Kia’s typical recall sits about 22 points above an average recall and 62% of its recalls are high severity. Mazda is close behind at +20 and 60%.\nVolume and severity are different things. The three companies with the most recalls (Ford, GM, Chrysler) don’t appear in the top 15. Honda and Toyota do, which matters because their recalls each cover so many vehicles (79 million and 72 million).\nMotorcycle and powersports makers rank high. Yamaha, Bombardier, KTM, Harley-Davidson and Kawasaki all make the top 15. A defect on a bike is more likely to be described as causing a crash, so this partly reflects the vehicle type.\nRepair rates vary a lot. Subaru got 85% of affected vehicles repaired. Yamaha (45%), Mitsubishi (45%) and Mazda (47%) got fewer than half.\nRecalls are far more common than they used to be. Vehicle recalls per year have risen about 4.3 times since the early 1990s and 1.8 times since the early 2000s.\n\nThe top spot, Jaguar Rover Triumph, is a historical case: all of its recalls date from 1967 to 1990, before most of today’s safety reporting existed."
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#limitations",
+    "href": "projects/nhtsa-recalls/index.html#limitations",
+    "title": "Recall Severity by Manufacturer",
+    "section": "Limitations",
+    "text": "Limitations\n\nAdvisory flags only exist from 2012 on. Do Not Drive and Park Outside warnings are zero for every year before 2012, then jump. That’s when NHTSA started recording them, not a real jump in danger, so older recalls lean more on the keyword score.\nComplaints data isn’t included. NHTSA’s owner complaints file is the richest source of severity detail (published research has mined it for exactly this), but at about 1.5 GB it wouldn’t fit in the free database tier I used.\nSome recalls have no component listed. 7,629 recalls in the source data have no component, so they’re left out of any component-level breakdown.\nThe repair bill is illustrative. The “Illustrative Repair Bill” column multiplies vehicles affected by a flat $85 per vehicle. It shows relative scale, not real costs."
+  },
+  {
+    "objectID": "projects/nhtsa-recalls/index.html#what-id-do-next",
+    "href": "projects/nhtsa-recalls/index.html#what-id-do-next",
+    "title": "Recall Severity by Manufacturer",
+    "section": "What I’d do next",
+    "text": "What I’d do next\n\nLoad the complaints file into a database without the 500 MB limit and use it to check the keyword score.\nCompare severity per vehicle sold, not just per recall, using sales data.\nPublish the SQL scripts alongside this page (in progress)."
+  },
+  {
     "objectID": "projects/phoenix-nextgen/index.html",
     "href": "projects/phoenix-nextgen/index.html",
     "title": "Flight Paths and House Prices",
@@ -75,40 +159,5 @@
     "title": "Flight Paths and House Prices",
     "section": "Files",
     "text": "Files\n\n\n\nFile\nWhat it is\n\n\n\n\noriginal.do\nThe Stata script as submitted for the course\n\n\nrevised_annotated.do\nThe revised analysis, commented throughout\n\n\ngrouping.csv\nZip-code-to-group crosswalk produced in QGIS\n\n\n\nThe Zillow ZHVI file is not included here — it is public, frequently updated, and large. Download “ZHVI All Homes, by ZIP Code” from Zillow Research. The repository README has the full instructions for re-running the analysis."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Oliver Hatley",
-    "section": "",
-    "text": "Data analysis · Mobile & Birmingham, AL\n\n\n\n\n\n\nEvent study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.\n\n\n\n\n\nI came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.\n\n\n\n\n\n2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python\n\n\n\n\n\n\n\n\n2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools\n\n\n\n\n\n\n\n\n\nEmail LinkedIn GitHub"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Oliver Hatley",
-    "section": "",
-    "text": "I came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made."
-  },
-  {
-    "objectID": "index.html#projects",
-    "href": "index.html#projects",
-    "title": "Oliver Hatley",
-    "section": "",
-    "text": "2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n2026 · In progress\n\n\nSomething new, in SQL and Python.\nSQL Python"
-  },
-  {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "Oliver Hatley",
-    "section": "",
-    "text": "2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools"
-  },
-  {
-    "objectID": "index.html#contact",
-    "href": "index.html#contact",
-    "title": "Oliver Hatley",
-    "section": "",
-    "text": "Email LinkedIn GitHub"
   }
 ]
