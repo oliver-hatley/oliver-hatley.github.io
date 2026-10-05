@@ -8,6 +8,11 @@ toc: true
 toc-location: left
 ---
 
+<!-- ## ADDED BECAUSE the project is still in progress; a Quarto callout box shows this at the top of the page so readers know more is coming. Delete this block when the project is finished. ## -->
+::: {.callout-note}
+**This project is still in progress.** The dashboard and findings below are complete. The SQL scripts behind the cleanup and severity scoring are being added next.
+:::
+
 <!-- Opening paragraph: the question, the data, the tools, in one breath -->
 
 Ford, GM and Chrysler issue more recalls than anyone. That doesn't make their recalls the most dangerous. This project scores every vehicle recall in the National Highway Traffic Safety Administration (NHTSA) database for how serious the defect is, then ranks manufacturers by the typical severity of their recalls instead of the raw count.
