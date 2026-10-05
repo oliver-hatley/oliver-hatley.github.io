@@ -45,13 +45,14 @@ How FAA routing changes moved property values beneath a new approach corridor.
 :::
 
 ::: {.tl-card}
-**2026 · In progress**
+<!-- %% CHANGED BECAUSE the "Next project" placeholder is now a finished project; same card layout as Flight Paths (label, linked title, one line, tool tags) %% -->
+**2026 · Personal**
 
-### Next project
+### [**Recall Severity by Manufacturer**](projects/nhtsa-recalls/index.qmd)
 
-Something new, in SQL and Python.
+Which vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.
 
-`SQL` `Python`
+`SQL` `PostgreSQL` `Power BI` `DAX`
 :::
 
 :::
