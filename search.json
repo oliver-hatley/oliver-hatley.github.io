@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "Data analysis · Mobile & Birmingham, AL\n\n\n\n\n\n\nEvent study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.\n\n\n\n\n\nI came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.\n\n\n\n\n\n2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n2026 · Personal\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX\n\n\n\n\n\n\n\n\n2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools\n\n\n\n\n\n\n\n\n\nEmail LinkedIn GitHub"
+    "text": "Data analysis · Mobile & Birmingham, AL\n\n\n\n\n\n\nEvent study estimates for newly-affected zip codes: no measurable effect at the 2014 reroute, with a gap opening only from 2017.\n\n\n\n\n\nI came to economics from marketing, and stayed because it let me do something with what I was learning. What frustrated me in class was talking about concepts without ever testing them; the analysis is where the work started feeling real. Three years working in elementary schools taught me I can hold a room, and that’s the half of this I don’t want to give up: dig far enough into the data to find what other people miss, then be the one explaining it where the decision actually gets made.\n\n\n\n\n\n2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n\n2026 · In progress\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX\n\n\n\n\n\n\n\n\n2022 — 2026\n\n\n\nConcentration in economic analysis and policy. Certificate, Honors Leadership Development Academy.\n\n\n\n\nTools\n\n\n\n\n\n\n\n\n\nEmail LinkedIn GitHub"
   },
   {
     "objectID": "index.html#about",
@@ -18,7 +18,7 @@
     "href": "index.html#projects",
     "title": "Oliver Hatley",
     "section": "",
-    "text": "2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n2026 · Personal\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX"
+    "text": "2026 · College\n\n\nHow FAA routing changes moved property values beneath a new approach corridor.\nStata Geospatial Panel data DiD\n\n\n\n\n\n2026 · In progress\n\n\nWhich vehicle makers have the most dangerous recalls, scored across 25,000+ NHTSA recalls.\nSQL PostgreSQL Power BI DAX"
   },
   {
     "objectID": "index.html#experience",
@@ -39,7 +39,7 @@
     "href": "projects/nhtsa-recalls/index.html",
     "title": "Recall Severity by Manufacturer",
     "section": "",
-    "text": "Ford, GM and Chrysler issue more recalls than anyone. That doesn’t make their recalls the most dangerous. This project scores every vehicle recall in the National Highway Traffic Safety Administration (NHTSA) database for how serious the defect is, then ranks manufacturers by the typical severity of their recalls instead of the raw count.\nBuilt with SQL (PostgreSQL on Supabase) for cleaning and scoring, and Power BI (Power Query and DAX) for the dashboard."
+    "text": "Note\n\n\n\nThis project is still in progress. The dashboard and findings below are complete. The SQL scripts behind the cleanup and severity scoring are being added next.\nFord, GM and Chrysler issue more recalls than anyone. That doesn’t make their recalls the most dangerous. This project scores every vehicle recall in the National Highway Traffic Safety Administration (NHTSA) database for how serious the defect is, then ranks manufacturers by the typical severity of their recalls instead of the raw count.\nBuilt with SQL (PostgreSQL on Supabase) for cleaning and scoring, and Power BI (Power Query and DAX) for the dashboard."
   },
   {
     "objectID": "projects/nhtsa-recalls/index.html#the-dashboard",
